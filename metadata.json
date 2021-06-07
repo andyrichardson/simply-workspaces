@@ -1,0 +1,6 @@
+{
+  "name": "Simply Workspaces",
+  "description": "Workspace indication with an i3/polybar style.",
+  "uuid": "simply.workspaces@andyrichardson.dev",
+  "shell-version": ["40"]
+}

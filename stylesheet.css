@@ -1,0 +1,13 @@
+/* Add your custom extension styling here */
+.indicator {
+    padding: 0 0.3em;
+    color: #888;
+}
+
+.indicator.active, .indicator:hover {
+    color: #fff;
+}
+
+.container {
+    margin: 0 0.5em;
+}
