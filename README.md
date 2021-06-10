@@ -6,6 +6,22 @@ Gnome 3 workspace indicator with an i3/polybar style.
 
 ![Screenshot from 2021-06-07 20-17-10](https://user-images.githubusercontent.com/10779424/121076492-6664bb00-c7ce-11eb-81ae-898b06c92129.png)
 
+## Installation
+
+The easiest way to get started is by getting this from the [Gnome Extensions site](https://extensions.gnome.org/extension/4343/simply-workspaces/).
+
+### Manual installation
+
+```sh
+git clone https://github.com/andyrichardson/simply-workspaces.git
+cd simply-workspaces
+make install
+```
+
+### Nix
+
+See example [dotfiles here](https://github.com/andyrichardson/dotfiles/blob/2e8792fbd810499d4297d5ec25bc221b91b2e44e/nix/flake.nix#L98).
+
 ## Usage
 
 Make sure you're using static workspaces **(required)**
