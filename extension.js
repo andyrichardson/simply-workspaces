@@ -19,8 +19,9 @@ let container;
 const handlers = [];
 
 const initUI = () => {
+  const workspaceCount =  ExtensionUtils.getSettings("org.gnome.desktop.wm.preferences").get_int('num-workspaces');
   const currentWorkspace = WorkspaceManager.get_active_workspace_index();
-  indicators = new Array(9).fill(null).map((_, i) => {
+  indicators = new Array(workspaceCount).fill(null).map((_, i) => {
     const active = i === currentWorkspace;
     const workspace = WorkspaceManager.get_workspace_by_index(i);
     return WorkspaceIndicator({
