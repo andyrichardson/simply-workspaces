@@ -10,6 +10,9 @@
           uuid = (builtins.fromJSON (builtins.readFile ./metadata.json)).uuid;
           src = ./.;
           makeFlags = ["PREFIX=$out"];
+          installPhase = ''
+            make install PREFIX=$out
+          '';
         });
       });
 }
