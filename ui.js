@@ -1,7 +1,6 @@
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 const { St } = imports.gi;
 
-
 var WorkspaceIndicator = ({ label, active, windowCount }) => {
   const node = St.Button.new_with_label(label);
   const state = {
@@ -10,17 +9,17 @@ var WorkspaceIndicator = ({ label, active, windowCount }) => {
     windowCount,
   };
 
-  node.set_style_class_name('indicator');
+  node.set_style_class_name("indicator");
   const render = () => {
     if (!state.active && !state.windowCount) {
       node.hide();
       return;
     }
 
-    const styles = ['indicator', state.active ? 'active' : ''];
-    node.set_style_class_name(styles.join(' '));
+    const styles = ["indicator", state.active ? "active" : ""];
+    node.set_style_class_name(styles.join(" "));
     node.show();
-    log(node.get_style_class_name())
+    log(node.get_style_class_name());
   };
 
   const setLabel = (l) => (state.label = l);
@@ -29,7 +28,7 @@ var WorkspaceIndicator = ({ label, active, windowCount }) => {
     state.active = true;
     render();
   };
-  
+
   const setInactive = () => {
     state.active = false;
     render();
@@ -54,15 +53,15 @@ var WorkspaceIndicator = ({ label, active, windowCount }) => {
 
 var Container = ({ indicators }) => {
   const node = St.BoxLayout.new();
-  node.set_style_class_name('container');
-  
+  node.set_style_class_name("container");
+
   indicators.forEach((i) => {
     node.add_child(i.node);
   });
 
   return {
     node,
-    indicators
+    indicators,
   };
 };
 
