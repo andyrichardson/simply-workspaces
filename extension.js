@@ -5,21 +5,15 @@ const { Container, WorkspaceIndicator } = Me.imports.ui;
 const WorkspaceManager = global.workspace_manager;
 const Main = imports.ui.main;
 
-if (
-  ExtensionUtils.getSettings("org.gnome.shell.overrides").get_boolean(
-    "dynamic-workspaces"
-  )
-) {
-  throw Error("Dynamic workspaces are not supported.");
-}
-
 // Initial state
 let indicators;
 let container;
 const handlers = [];
 
 const initUI = () => {
-  const workspaceCount =  ExtensionUtils.getSettings("org.gnome.desktop.wm.preferences").get_int('num-workspaces');
+  const workspaceCount = ExtensionUtils.getSettings(
+    "org.gnome.desktop.wm.preferences"
+  ).get_int("num-workspaces");
   const currentWorkspace = WorkspaceManager.get_active_workspace_index();
   indicators = new Array(workspaceCount).fill(null).map((_, i) => {
     const active = i === currentWorkspace;
@@ -37,7 +31,7 @@ const attachHandlers = () => {
   // Listen for workspace switch
   const changeHandler = WorkspaceManager.connect(
     "active-workspace-changed",
-    (...args) => {
+    () => {
       const activeWorkspace = WorkspaceManager.get_active_workspace_index();
       indicators.forEach((indicator, index) => {
         index === activeWorkspace
@@ -59,7 +53,6 @@ const attachHandlers = () => {
       updateWindowCount
     );
     const nodeClick = instance.node.connect("clicked", () => {
-      log("CLICK DETECTED");
       workspace.activate(Date.now() / 1000);
     });
 
@@ -78,11 +71,22 @@ const detachHandlers = () => {
   }
 };
 
-var init = () => {
-  // log("Initializing extension");
-};
+var init = () => {};
 
 var enable = () => {
+  if (
+    ExtensionUtils.getSettings("org.gnome.mutter").get_boolean(
+      "dynamic-workspaces"
+    )
+  ) {
+    Main.notifyError(
+      "Simply Workspaces Extension",
+      "Dynamic workspaces are not supported"
+    );
+    logError(Error("Dynamic workspaces are not supported."));
+    return;
+  }
+
   initUI();
   attachHandlers();
   Main.panel._leftBox.insert_child_at_index(container.node, 0);
