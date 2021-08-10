@@ -70,10 +70,10 @@ Set up `super+shift+num` keyboard shortcut to move windows between workspaces.
 ```sh
 for i in {1..10}
 do
-   dconf write /org/gnome/desktop/wm/keybindings/move-window-to-workspace-$i "['<Super><Shift>$i']"
+   dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-$i "['<Super><Shift>$i']"
 done
 # Workspace 10 -> 0
-dconf write /org/gnome/desktop/wm/keybindings/move-window-to-workspace-10 "['<Super><Shift>10']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-10 "['<Super><Shift>10']"
 ```
 
 #### Tiling
