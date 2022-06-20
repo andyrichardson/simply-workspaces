@@ -38,6 +38,12 @@ Make sure you're using static workspaces **(required)**
 dconf write /org/gnome/shell/overrides/dynamic-workspaces false
 ```
 
+or for Gnome 42:
+
+```
+dconf write /org/gnome/mutter/dynamic-workspaces false
+```
+
 ### Suggested setup
 
 Here's some quick tips for getting an i3-like experience in Gnome.
