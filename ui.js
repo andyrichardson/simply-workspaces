@@ -19,7 +19,6 @@ var WorkspaceIndicator = ({ label, active, windowCount }) => {
     const styles = ["indicator", state.active ? "active" : ""];
     node.set_style_class_name(styles.join(" "));
     node.show();
-    log(node.get_style_class_name());
   };
 
   const setLabel = (l) => (state.label = l);
