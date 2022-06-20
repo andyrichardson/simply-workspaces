@@ -79,7 +79,7 @@ do
    dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-$i "['<Super><Shift>$i']"
 done
 # Workspace 10 -> 0
-dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-10 "['<Super><Shift>10']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-10 "['<Super><Shift>0']"
 ```
 
 #### Tiling
