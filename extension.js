@@ -69,7 +69,7 @@ const attachHandlers = () => {
       updateWindowCount
     );
     const nodeClick = instance.node.connect("clicked", () => {
-      workspace.activate(Date.now() / 1000);
+      workspace.activate(global.get_current_time());
     });
 
     return () => {
