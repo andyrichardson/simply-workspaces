@@ -75,10 +75,10 @@ const attachHandlers = () => {
     return () => {
       workspace.disconnect(windowAdded);
       workspace.disconnect(windowRemoved);
-      instance.disconnect(nodeClick);
+      instance.node.disconnect(nodeClick);
     };
   });
-  handlers.concat(workspaceHandlers);
+  handlers.push(...workspaceHandlers);
 };
 
 const detachHandlers = () => {
