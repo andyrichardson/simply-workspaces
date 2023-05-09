@@ -3,7 +3,7 @@ const Me = ExtensionUtils.getCurrentExtension();
 const { Container, WorkspaceIndicator } = Me.imports.ui;
 
 const WorkspaceManager = global.workspace_manager;
-const Display = global.screen;
+const Display = global.display;
 const Main = imports.ui.main;
 
 // Initial state
