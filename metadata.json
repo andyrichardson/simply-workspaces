@@ -3,6 +3,6 @@
   "description": "Workspace indication with an i3/polybar style.",
   "uuid": "simply.workspaces@andyrichardson.dev",
   "version": 1,
-  "shell-version": ["40", "41", "42", "43"],
+  "shell-version": ["40", "41", "42", "43", "44"],
   "url": "https://github.com/andyrichardson/simply-workspaces"
 }

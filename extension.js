@@ -3,7 +3,7 @@ const Me = ExtensionUtils.getCurrentExtension();
 const { Container, WorkspaceIndicator } = Me.imports.ui;
 
 const WorkspaceManager = global.workspace_manager;
-const { Display } = imports.gi.Meta;
+const Display = global.display;
 const Main = imports.ui.main;
 
 // Initial state
@@ -16,7 +16,7 @@ const getWorkspaceWindowCount = (workspace) => {
     return 0;
   }
 
-  const primary = new Display().get_primary_monitor();
+  const primary = Display.get_primary_monitor();
   return workspace.list_windows().reduce((agg, window) => {
     if (window.get_monitor() !== primary) {
       return agg;
