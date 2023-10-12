@@ -1,7 +1,6 @@
-const Me = imports.misc.extensionUtils.getCurrentExtension();
-const { St } = imports.gi;
+import St from 'gi://St';
 
-var WorkspaceIndicator = ({ label, active, windowCount }) => {
+export const WorkspaceIndicator = ({ label, active, windowCount }) => {
   const node = St.Button.new_with_label(label);
   const state = {
     label,
@@ -50,7 +49,7 @@ var WorkspaceIndicator = ({ label, active, windowCount }) => {
   };
 };
 
-var Container = ({ indicators }) => {
+export const Container = ({ indicators }) => {
   const node = St.BoxLayout.new();
   node.set_style_class_name("container");
 
@@ -63,6 +62,3 @@ var Container = ({ indicators }) => {
     indicators,
   };
 };
-
-var styleToString = (style) =>
-  Object.keys(style).reduce((agg, key) => `${agg} ${key}: ${style[key]};`, "");

@@ -1,10 +1,10 @@
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const { Container, WorkspaceIndicator } = Me.imports.ui;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
+
+import { Container, WorkspaceIndicator } from './ui.js';
 
 const WorkspaceManager = global.workspace_manager;
 const Display = global.display;
-const Main = imports.ui.main;
 
 // Initial state
 let indicators;
@@ -26,10 +26,7 @@ const getWorkspaceWindowCount = (workspace) => {
   }, 0);
 };
 
-const initUI = () => {
-  const workspaceCount = ExtensionUtils.getSettings(
-    "org.gnome.desktop.wm.preferences"
-  ).get_int("num-workspaces");
+const initUI = (workspaceCount) => {
   const currentWorkspace = WorkspaceManager.get_active_workspace_index();
   indicators = new Array(workspaceCount).fill(null).map((_, i) => {
     const active = i === currentWorkspace;
@@ -87,28 +84,32 @@ const detachHandlers = () => {
   }
 };
 
-var init = () => {};
+export default class SimplyWorkspaces extends Extension {
+  enable() {
+    if (
+      this.getSettings("org.gnome.mutter").get_boolean(
+        "dynamic-workspaces"
+      )
+    ) {
+      Main.notifyError(
+        "Simply Workspaces Extension",
+        "Dynamic workspaces are not supported"
+      );
+      logError(Error("Dynamic workspaces are not supported."));
+      return;
+    }
 
-var enable = () => {
-  if (
-    ExtensionUtils.getSettings("org.gnome.mutter").get_boolean(
-      "dynamic-workspaces"
-    )
-  ) {
-    Main.notifyError(
-      "Simply Workspaces Extension",
-      "Dynamic workspaces are not supported"
-    );
-    logError(Error("Dynamic workspaces are not supported."));
-    return;
+    const workspaceCount = this.getSettings(
+      "org.gnome.desktop.wm.preferences"
+    ).get_int("num-workspaces");
+    initUI(workspaceCount);
+
+    attachHandlers();
+    Main.panel._leftBox.insert_child_at_index(container.node, 0);
   }
 
-  initUI();
-  attachHandlers();
-  Main.panel._leftBox.insert_child_at_index(container.node, 0);
-};
-
-var disable = () => {
-  detachHandlers();
-  Main.panel._leftBox.remove_child(container.node);
-};
+  disable() {
+    detachHandlers();
+    Main.panel._leftBox.remove_child(container.node);
+  }
+}
